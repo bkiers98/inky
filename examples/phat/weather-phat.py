@@ -59,8 +59,8 @@ WHITE = inky_display.WHITE if not flip else inky_display.BLACK
 
 # Details to customise your weather display
 
-CITY = "Sheffield"
-COUNTRYCODE = "GB"
+CITY = "Indianapolis"
+COUNTRYCODE = "USA"
 WARNING_TEMP = 25.0
 
 
@@ -75,7 +75,7 @@ def get_coords(address):
 def get_weather(address):
     coords = get_coords(address)
     weather = {}
-    res = requests.get("https://api.open-meteo.com/v1/forecast?latitude=" + str(coords[0]) + "&longitude=" + str(coords[1]) + "&current_weather=true")
+    res = requests.get("https://api.open-meteo.com/v1/forecast?latitude=" + str(coords[0]) + "&longitude=" + str(coords[1]) + "&temperature_unit=fahrenheit&wind_speed_unit=mph&current_weather=true")
     if res.status_code == 200:
         j = json.loads(res.text)
         current = j["current_weather"]
@@ -167,15 +167,15 @@ draw.line((69, 58, 174, 58))      # Horizontal middle line
 draw.line((169, 58, 169, 58), 2)  # Red seaweed pixel :D
 
 # Write text with weather values to the canvas
-datetime = time.strftime("%d/%m %H:%M")
+datetime = time.strftime("%m/%d %H:%M")
 
 draw.text((41, 12), datetime, WHITE, font=font)
 
 draw.text((72, 34), "T", WHITE, font=font)
-draw.text((92, 34), "{}°C".format(temperature), WHITE if temperature < WARNING_TEMP else inky_display.RED, font=font)
+draw.text((92, 34), "{}°F".format(temperature), WHITE if temperature < WARNING_TEMP else inky_display.RED, font=font)
 
 draw.text((72, 58), "W", WHITE, font=font)
-draw.text((92, 58), "{}kmh".format(windspeed), WHITE, font=font)
+draw.text((92, 58), "{}mph".format(windspeed), WHITE, font=font)
 
 # Draw the current weather icon over the backdrop
 if weather_icon is not None:
