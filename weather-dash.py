@@ -100,7 +100,7 @@ draw.rounded_rectangle(
     width = 2
 )
 date_local=time.strftime("%m/%d")
-time_local=time.strftime("%H:%M")
+time_local=time.strftime("%I:%M %p")
 
 draw.text((15, 11), "{}°F".format(temperature), WHITE, font=font_large)
 draw.text((135, 11), date_local, BLACK, font=font_medium)
