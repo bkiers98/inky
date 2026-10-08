@@ -12,9 +12,16 @@ WHITE = inky_display.WHITE
 from PIL import Image, ImageFont, ImageDraw
 from font_fredoka_one import FredokaOne
 
-font_large = ImageFont.truetype(FredokaOne, 36)
-font_medium = ImageFont.truetype(FredokaOne, 22)
-font_small = ImageFont.truetype(FredokaOne, 16)
+# font_large = ImageFont.truetype(FredokaOne, 36)
+# font_medium = ImageFont.truetype(FredokaOne, 22)
+# font_small = ImageFont.truetype(FredokaOne, 16)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+font_path = os.path.join(script_dir, 'fonts/creato_display/CreatoDisplay-Regular.otf')
+
+font_large = ImageFont.truetype(font_path, 36)
+font_medium = ImageFont.truetype(font_path, 22)
+font_small = ImageFont.truetype(font_path, 16)
+
 
 try:
     import requests
